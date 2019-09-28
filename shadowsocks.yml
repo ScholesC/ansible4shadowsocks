@@ -1,11 +1,7 @@
-- name: configure shadowsocks
-  gather_facts: True
-  hosts: localhost
-
-- hosts: shadowsocks
+- hosts: localhost
   handlers:
     - name: restart shadowsocks
-    service: name=shadowsocks state=restarted enabled=yes
+      service: name=shadowsocks state=restarted enabled=yes
 
   tasks:
     - apt: name={{ item }} update_cache=yes cache_valid_time=3600 state=present
@@ -13,6 +9,6 @@
         - shadowsocks
 
     - copy:
-      src: shadowsocks.json
-      dest: /etc/shadowsocks/config.json
+        src: shadowsocks.json
+        dest: /etc/shadowsocks/config.json
       notify: restart shadowsocks
