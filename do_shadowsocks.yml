@@ -4,11 +4,13 @@
       service: name=shadowsocks state=restarted enabled=yes
 
   tasks:
-    - apt: name={{ item }} update_cache=yes cache_valid_time=3600 state=present
+    - name: apt install shadowsocks
+      apt: name={{ item }} update_cache=yes cache_valid_time=3600 state=present
       with_items:
         - shadowsocks
 
-    - copy:
+    - name: install /etc/shadowsocks/config.json
+      copy:
         src: shadowsocks.json
         dest: /etc/shadowsocks/config.json
       notify: restart shadowsocks
