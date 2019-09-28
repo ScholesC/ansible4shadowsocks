@@ -1,5 +1,5 @@
 # ansible4shadowsocks
 
-'''bash
+```bash
 make ssserver
-'''
+```
